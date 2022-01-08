@@ -5,16 +5,10 @@ This sample was created using Python 3.9.0
 ## Getting started
 
 Create a virtual environment for the project:  
-`python -m venv venv`
-
-Then activate the virtual environment:  
-`cd venv/scripts/`
-`activate`
-`cd..`
-`cd..`
+`pipenv shell`
 
 Now install the dependencies for the project:  
-`pip install -r requirements.txt`
+`pipenv install`
 
 Run the API with Uvicorn:  
 `uvicorn main:app --reload`
