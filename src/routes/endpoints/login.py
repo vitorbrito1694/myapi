@@ -1,4 +1,3 @@
-from main import app
 from fastapi import Depends, HTTPException, APIRouter
 from src.app.auth import AuthHandler
 from src.app.models.authSchema import AuthDetails
