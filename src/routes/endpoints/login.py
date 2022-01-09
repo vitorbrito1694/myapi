@@ -1,12 +1,13 @@
 from main import app
-from fastapi import Depends, HTTPException
+from fastapi import Depends, HTTPException, APIRouter
 from src.app.auth import AuthHandler
-from src.models.schemas import AuthDetails
+from src.app.models.authSchema import AuthDetails
 
+router = APIRouter()
 auth_handler = AuthHandler()
 users = []
 
-@app.post('/register', status_code=201)
+@router.post('/register', status_code=201)
 def register(auth_details: AuthDetails):
     if any(x['username'] == auth_details.username for x in users):
         raise HTTPException(status_code=400, detail='Usuário Salvo com Sucesso!')
@@ -17,8 +18,7 @@ def register(auth_details: AuthDetails):
     })
     return
 
-
-@app.post('/login')
+@router.post('/login')
 def login(auth_details: AuthDetails):
     user = None
     for x in users:
@@ -31,11 +31,11 @@ def login(auth_details: AuthDetails):
     token = auth_handler.encode_token(user['username'])
     return { 'token': token }
 
-@app.get('/')
-@app.get('/unprotected')
+@router.get('/')
+@router.get('/unprotected')
 def unprotected():
     return { 'hello': 'world' }
 
-@app.get('/protected')
+@router.get('/protected')
 def protected(username=Depends(auth_handler.auth_wrapper)):
     return { 'name': username }

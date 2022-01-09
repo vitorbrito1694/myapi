@@ -1,11 +1,10 @@
 from fastapi import FastAPI
-from src.app.config import settings
+# from src.app.config import settings
 from src.routes.api import api_router
 
-settings.PROJECT_NAME = "SigoAPI"
+# settings.PROJECT_NAME = "SigoAPI"
+# settings.API_V1_STR = "/SigoAPI/v1"
 
-app = FastAPI(
-    title=settings.PROJECT_NAME, openapi_url=f"{settings.API_V1_STR}"
-)
+app = FastAPI(title="SigoAPI")
 
-app.include_router(api_router, prefix=settings.API_V1_STR)
+app.include_router(api_router, prefix="/SigoAPI/v1")
