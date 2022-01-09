@@ -1,7 +1,5 @@
-from fastapi import FastAPI, Depends, HTTPException
-from src.app.auth import AuthHandler
+from fastapi import FastAPI
 from src.app.config import settings
-from src.models.schemas import AuthDetails
 from src.routes.api import api_router
 
 settings.PROJECT_NAME = "SigoAPI"
